@@ -21,17 +21,20 @@
     .metrics tbody th { text-align: left; }
     .metrics th, .metrics td { padding: 9px 6px; }
     .table-note { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
-    .prompt-table { width: 100%; min-width: 0; margin: 0 0 28px; table-layout: fixed; font-size: 14px; }
+    .prompt-section .intro { font-size: 17px; }
+    .prompt-table { width: 100%; min-width: 0; margin: 0 0 28px; table-layout: fixed; font-size: 13px; }
     .prompt-table th, .prompt-table td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; white-space: normal; overflow-wrap: anywhere; }
-    .prompt-table thead th { border-top: 1px solid var(--line); font-size: 13px; }
+    .prompt-table thead th { border-top: 1px solid var(--line); font-size: 12px; }
     .prompt-table th:first-child { width: 6%; }
     .prompt-table th:nth-child(2) { width: 12%; }
     .prompt-table th:nth-child(3) { width: 10%; }
     .prompt-table th:nth-child(4) { width: 38%; }
     .prompt-table th:nth-child(5), .prompt-table th:nth-child(6) { width: 17%; }
     .prompt-table tbody th { font-weight: 700; }
+    .prompt-table caption { margin-bottom: 10px; color: var(--muted); font-size: 14px; text-align: left; }
     .citation-section pre { margin: 0; padding: 23px; overflow-x: auto; border: 1px solid var(--line); border-radius: 7px; background: #f6f8f9; color: #384a55; font: 13px/1.65 Consolas, "Liberation Mono", monospace; }
     @media (max-width: 640px) {
+      .prompt-section .intro { font-size: 16px; }
       .metrics thead { display: none; }
       .metrics table, .metrics tbody, .metrics tr, .metrics th, .metrics td { display: block; width: 100%; }
       .metrics tr { margin-bottom: 16px; border: 1px solid var(--line); background: #fff; }
@@ -124,7 +127,7 @@
         <tr><th scope="row">P3</th><td data-label="Language">Chinese</td><td data-label="Type">Complex</td><td data-label="Prompt" lang="zh">“保持无云区地表信息不变，恢复云覆盖区下的地表”</td><td data-label="VLM PSNR / SSIM">9.433 / 0.0542</td><td data-label="PhyVLM-CR PSNR / SSIM">15.442 / 0.7784</td></tr>
         <tr><th scope="row">P4</th><td data-label="Language">English</td><td data-label="Type">Complex</td><td data-label="Prompt">“Keep cloud-free regions unchanged and recover cloud-covered regions”</td><td data-label="VLM PSNR / SSIM">12.148 / 0.0340</td><td data-label="PhyVLM-CR PSNR / SSIM">18.282 / 0.8526</td></tr>
       </tbody></table>
-      <figure class="figure-card"><img src="assets/prompts.jpg" alt="Four prompt variants showing the cloudy scene, VLM output and error, estimated transmission, and final PhyVLM-CR result and error" width="1063" height="718" loading="lazy"><figcaption>Paper Fig. 3 · Prompt sensitivity on the Yunnan scene</figcaption></figure>
+      <figure class="figure-card"><img src="assets/prompts.jpg" alt="Four prompt variants showing the cloudy scene, VLM output and error, estimated transmission, final PhyVLM-CR result and error, with a 0–1 error-map legend" width="1158" height="718" loading="lazy"><figcaption>Visual prompt sensitivity analysis on the Yunnan scene.</figcaption></figure>
     </section>
 
     <section id="code" class="section code-section"><div class="wrap code-grid"><div><span class="kicker">04 / CODE</span><h2>Colab notebook</h2><p>The public CR6 notebook covers Earth Engine scene collection, Qwen cognitive-prior acquisition, physics-guided restoration, evaluation, and export.</p><a class="button light" href="PhyVLM_CR6_Colab.ipynb" download>Download notebook <span aria-hidden="true">↗</span></a></div><div class="code-notes"><div><span>01</span><p>Open the notebook in Google Colab.</p></div><div><span>02</span><p>Add <code>EE_PROJECT_ID</code> and <code>DASHSCOPE_API_KEY</code> to Colab Secrets and grant access.</p></div><div><span>03</span><p>Run cells in order. Earth Engine and DashScope access are required.</p></div></div></div></section>
