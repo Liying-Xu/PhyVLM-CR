@@ -4,7 +4,7 @@ Code and project page for **Physics-Guided VLM Priors for All-Cloud Removal** by
 
 ## Colab notebook
 
-Open [`PhyVLM_CR6_Colab.ipynb`](PhyVLM_CR6_Colab.ipynb) in Google Colab and run cells in order. Before running, add these two entries in **Colab → Secrets** and grant the notebook access:
+[Open in Colab](https://colab.research.google.com/github/Liying-Xu/PhyVLM-CR/blob/main/PhyVLM_CR6_Colab.ipynb) or download [`PhyVLM_CR6_Colab.ipynb`](PhyVLM_CR6_Colab.ipynb), then run cells in order. Before running, add these two entries in **Colab → Secrets** and grant the notebook access:
 
 - `EE_PROJECT_ID`: your Google Earth Engine Cloud project ID.
 - `DASHSCOPE_API_KEY`: your DashScope API key for Qwen-Image-Edit-Plus.
