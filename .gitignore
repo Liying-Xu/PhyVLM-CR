@@ -1,0 +1,10 @@
+*.env
+.env*
+*.json
+!*.ipynb
+!*.geojson
+credentials*
+outputs*/
+data/
+__pycache__/
+.ipynb_checkpoints/

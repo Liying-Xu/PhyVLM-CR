@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PhyVLM-CR: physics-guided vision-language priors for all-cloud removal in Sentinel-2 imagery.">
+  <title>PhyVLM-CR | All-cloud removal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top">PhyVLM<span>—</span>CR</a>
+    <nav aria-label="Main navigation">
+      <a href="#approach">Approach</a>
+      <a href="#results">Results</a>
+      <a href="#code">Code</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="eyebrow"><span class="dot"></span> Sentinel-2 · zero-shot · all-cloud restoration</div>
+      <h1>Seeing the surface<br><em>through every cloud.</em></h1>
+      <p class="lead">PhyVLM-CR turns a vision-language model’s cloud-free prediction into a physical prior. Transmission then guides radiometric correction, detail preservation, and temporal reconstruction in one continuous workflow.</p>
+      <div class="actions">
+        <a class="button primary" href="PhyVLM_CR6_Colab.ipynb" download>Download Colab notebook <span aria-hidden="true">↗</span></a>
+        <a class="button secondary" href="#results">Explore results <span aria-hidden="true">↓</span></a>
+      </div>
+      <p class="authors">Liying Xu · Huifang Li · Huanfeng Shen</p>
+      <div class="hero-visual">
+        <img src="assets/results.jpg" alt="Six Sentinel-2 scenes comparing cloudy input, mask, temporal reference, baselines, PhyVLM-CR and clear ground truth" width="1440" height="1050">
+        <span class="image-tag">PAPER FIG. 2 · SIX REAL CLOUD SCENES</span>
+      </div>
+    </section>
+
+    <section id="approach" class="section wrap">
+      <div class="section-head"><span class="kicker">01 / APPROACH</span><h2>A generative prior,<br><em>grounded in physics.</em></h2></div>
+      <p class="intro">The VLM prediction is used to infer atmospheric light and transmission, rather than copied directly into the final image. A continuous transmission map balances physical inversion with the observed image and a clear temporal reference.</p>
+      <figure class="figure-card">
+        <img src="assets/method.png" alt="Three-stage PhyVLM-CR pipeline: VLM cognitive prior acquisition, physics-guided parameter extraction, and unified all-cloud removal" width="1141" height="494" loading="lazy">
+        <figcaption>Paper Fig. 1 · Cognitive prior → physical parameters → unified restoration</figcaption>
+      </figure>
+      <div class="steps">
+        <div><b>01</b><h3>Acquire</h3><p>Qwen-Image-Edit supplies a semantic cloud-free prediction.</p></div>
+        <div><b>02</b><h3>Translate</h3><p>The prediction helps estimate atmospheric light and transmission.</p></div>
+        <div><b>03</b><h3>Restore</h3><p>Transmission guides physical correction and temporal fusion.</p></div>
+      </div>
+    </section>
+
+    <section id="results" class="section results-section">
+      <div class="wrap">
+        <div class="section-head"><span class="kicker">02 / EXPERIMENTS</span><h2>Six scenes.<br><em>One continuous treatment.</em></h2></div>
+        <p class="intro">The manuscript evaluates six 2023 Sentinel-2 scenes using the nearest clear observation as ground truth and the second-nearest as the temporal reference. The images below are reproduced from the supplied manuscript.</p>
+        <figure class="figure-card dark-card">
+          <img src="assets/results.jpg" alt="Qualitative comparison across Sichuan, Hainan, Qinghai, Hubei, Jiangsu, and Yunnan" width="1440" height="1050" loading="lazy">
+          <figcaption>Paper Fig. 2 · Cloudy · mask · reference · physical baseline · zero-shot baseline · VLM · PhyVLM-CR · truth</figcaption>
+        </figure>
+        <div class="metrics">
+          <div class="metric-lead"><span class="kicker">PAPER TABLE II</span><h3>Reported quality</h3><p>PSNR (dB) and SSIM against the clear target. These are manuscript values, not measurements from a new notebook run.</p></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Scene</th><th>Physical</th><th>Zero-shot</th><th>VLM</th><th>PhyVLM-CR</th></tr></thead>
+            <tbody>
+              <tr><th>Sichuan</th><td>17.583 / .5492</td><td>12.450 / .2679</td><td>20.890 / .5706</td><td>22.934 / .8012</td></tr>
+              <tr><th>Hainan</th><td>17.531 / .5556</td><td>12.737 / .2801</td><td>13.995 / .2547</td><td>19.168 / .7490</td></tr>
+              <tr><th>Qinghai</th><td>15.847 / .7698</td><td>9.708 / .3022</td><td>14.456 / .3182</td><td>19.312 / .8606</td></tr>
+              <tr><th>Hubei</th><td>19.701 / .7313</td><td>14.568 / .3042</td><td>18.937 / .5655</td><td>26.435 / .9025</td></tr>
+              <tr><th>Jiangsu</th><td>15.495 / .5258</td><td>11.073 / .2211</td><td>18.324 / .4125</td><td>22.332 / .7922</td></tr>
+              <tr><th>Yunnan</th><td>17.214 / .6522</td><td>11.512 / .3106</td><td>13.229 / .0323</td><td>21.149 / .8176</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap prompt-section">
+      <div class="section-head"><span class="kicker">03 / ROBUSTNESS</span><h2>The prompt changes.<br><em>The physics remains.</em></h2></div>
+      <p class="intro">The paper compares four Chinese and English prompts on Yunnan. Raw VLM images vary with wording; the final restoration is constrained by transmission-guided fusion.</p>
+      <figure class="figure-card"><img src="assets/prompts.jpg" alt="Four prompt variants showing the cloudy scene, VLM output and error, estimated transmission, and final PhyVLM-CR result and error" width="1063" height="692" loading="lazy"><figcaption>Paper Fig. 3 · Prompt sensitivity on the Yunnan scene</figcaption></figure>
+    </section>
+
+    <section id="code" class="section code-section"><div class="wrap code-grid"><div><span class="kicker">04 / CODE</span><h2>Run the CR6<br><em>Colab workflow.</em></h2><p>The public notebook covers Earth Engine scene collection, Qwen cognitive-prior acquisition, physics-guided restoration, evaluation, and export.</p><a class="button light" href="PhyVLM_CR6_Colab.ipynb" download>Download notebook <span aria-hidden="true">↗</span></a></div><div class="code-notes"><div><span>01</span><p>Open the notebook in Google Colab.</p></div><div><span>02</span><p>Add <code>EE_PROJECT_ID</code> and <code>DASHSCOPE_API_KEY</code> to Colab Secrets and grant access.</p></div><div><span>03</span><p>Run cells in order. Earth Engine and DashScope access are required.</p></div></div></div></section>
+  </main>
+  <footer class="wrap"><span>PhyVLM-CR · Physics-Guided VLM Priors for All-Cloud Removal</span><a href="#top">Back to top ↑</a></footer>
+</body>
+</html>
