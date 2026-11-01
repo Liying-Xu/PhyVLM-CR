@@ -3,33 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="PhyVLM-CR: physics-guided vision-language priors for all-cloud removal in Sentinel-2 imagery.">
-  <title>PhyVLM-CR | All-cloud removal</title>
+  <meta name="description" content="PhyVLM-CR: Physics-Guided VLM Priors for All-Cloud Removal. Abstract, method, results, and Colab code.">
+  <title>PhyVLM-CR | Physics-Guided VLM Priors for All-Cloud Removal</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pgcs-alignment.css">
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#top">PhyVLM<span>—</span>CR</a>
     <nav aria-label="Main navigation">
-      <a href="#approach">Approach</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#approach">Method</a>
       <a href="#results">Results</a>
       <a href="#code">Code</a>
+      <a href="#citation">Citation</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero wrap">
-      <div class="eyebrow"><span class="dot"></span> Sentinel-2 · zero-shot · all-cloud restoration</div>
-      <h1>Seeing the surface<br><em>through every cloud.</em></h1>
-      <p class="lead">PhyVLM-CR turns a vision-language model’s cloud-free prediction into a physical prior. Transmission then guides radiometric correction, detail preservation, and temporal reconstruction in one continuous workflow.</p>
+      <h1>Physics-Guided VLM Priors for All-Cloud Removal</h1>
+      <p class="venue">PhyVLM-CR · Research manuscript</p>
+      <p class="authors">Liying Xu, Huifang Li, Huanfeng Shen</p>
+      <p class="affiliation">Wuhan University · Wuhan, China</p>
       <div class="actions">
-        <a class="button primary" href="PhyVLM_CR6_Colab.ipynb" download>Download Colab notebook <span aria-hidden="true">↗</span></a>
-        <a class="button secondary" href="#results">Explore results <span aria-hidden="true">↓</span></a>
+        <a class="button secondary" href="#abstract">Abstract <span aria-hidden="true">↓</span></a>
+        <a class="button secondary" href="https://github.com/Liying-Xu/PhyVLM-CR">Code <span aria-hidden="true">↗</span></a>
+        <a class="button secondary" href="PhyVLM_CR6_Colab.ipynb" download>Colab notebook <span aria-hidden="true">↓</span></a>
       </div>
-      <p class="authors">Liying Xu · Huifang Li · Huanfeng Shen</p>
       <div class="hero-visual">
         <img src="assets/results.jpg" alt="Six Sentinel-2 scenes comparing cloudy input, mask, temporal reference, baselines, PhyVLM-CR and clear ground truth" width="1440" height="1050">
         <span class="image-tag">PAPER FIG. 2 · SIX REAL CLOUD SCENES</span>
+      </div>
+    </section>
+
+    <section id="abstract" class="section abstract-section">
+      <div class="reading-width">
+        <h2>Abstract</h2>
+        <p>Cloud removal remains a fundamental challenge in optical remote sensing due to heterogeneous cloud degradation. Thin clouds distort surface radiometry through partial transmission, while thick clouds obscure the underlying surface. Existing methods often handle thin-cloud correction and thick-cloud reconstruction separately, requiring explicit cloud-type delineation and causing error accumulation or spatial discontinuities in mixed-cloud scenes. To address this issue, we propose PhyVLM-CR, a physics-guided VLM prior framework for all-cloud removal, which integrates the semantic capability of a Vision-Language Model (VLM) with a physical imaging model. Specifically, the VLM output is incorporated into the estimation of a physical transmission map. The estimated transmission map supports thin-cloud radiometric correction through physical inversion and further provides a continuous weight for balancing current-scene restoration and temporally aligned reference information in low-transmission regions. By coupling the radiometric consistency of the physical model with the semantic and illumination priors of the VLM, PhyVLM-CR achieves physically constrained and semantically informed restoration without explicit cloud-type delineation. Experiments on real-world Sentinel-2 surface reflectance imagery demonstrate that PhyVLM-CR achieves superior visual and quantitative performance compared with existing cloud-removal methods.</p>
+        <div class="affiliations">
+          <p><strong>Affiliations from the manuscript</strong></p>
+          <p><strong>Liying Xu:</strong> School of Resource and Environmental Sciences and the Key Laboratory of Digital Cartography and Land Information Application, Ministry of Natural Resources, Wuhan University, Wuhan, China.</p>
+          <p><strong>Huifang Li:</strong> School of Resource and Environmental, Wuhan University, Wuhan, China.</p>
+          <p><strong>Huanfeng Shen:</strong> School of Resource and Environmental Sciences and the Collaborative Innovation Center for Geospatial Technology, Wuhan University, Wuhan, China.</p>
+        </div>
       </div>
     </section>
 
@@ -78,7 +95,8 @@
       <figure class="figure-card"><img src="assets/prompts.jpg" alt="Four prompt variants showing the cloudy scene, VLM output and error, estimated transmission, and final PhyVLM-CR result and error" width="1063" height="692" loading="lazy"><figcaption>Paper Fig. 3 · Prompt sensitivity on the Yunnan scene</figcaption></figure>
     </section>
 
-    <section id="code" class="section code-section"><div class="wrap code-grid"><div><span class="kicker">04 / CODE</span><h2>Run the CR6<br><em>Colab workflow.</em></h2><p>The public notebook covers Earth Engine scene collection, Qwen cognitive-prior acquisition, physics-guided restoration, evaluation, and export.</p><a class="button light" href="PhyVLM_CR6_Colab.ipynb" download>Download notebook <span aria-hidden="true">↗</span></a></div><div class="code-notes"><div><span>01</span><p>Open the notebook in Google Colab.</p></div><div><span>02</span><p>Add <code>EE_PROJECT_ID</code> and <code>DASHSCOPE_API_KEY</code> to Colab Secrets and grant access.</p></div><div><span>03</span><p>Run cells in order. Earth Engine and DashScope access are required.</p></div></div></div></section>
+    <section id="code" class="section code-section"><div class="wrap code-grid"><div><span class="kicker">04 / CODE</span><h2>Colab notebook</h2><p>The public CR6 notebook covers Earth Engine scene collection, Qwen cognitive-prior acquisition, physics-guided restoration, evaluation, and export.</p><a class="button light" href="PhyVLM_CR6_Colab.ipynb" download>Download notebook <span aria-hidden="true">↗</span></a></div><div class="code-notes"><div><span>01</span><p>Open the notebook in Google Colab.</p></div><div><span>02</span><p>Add <code>EE_PROJECT_ID</code> and <code>DASHSCOPE_API_KEY</code> to Colab Secrets and grant access.</p></div><div><span>03</span><p>Run cells in order. Earth Engine and DashScope access are required.</p></div></div></div></section>
+    <section id="citation" class="section citation-section reading-width"><h2>Citation</h2><p>Xu, L., Li, H., and Shen, H. <em>Physics-Guided VLM Priors for All-Cloud Removal.</em> Manuscript. Publication details will be added when available.</p></section>
   </main>
   <footer class="wrap"><span>PhyVLM-CR · Physics-Guided VLM Priors for All-Cloud Removal</span><a href="#top">Back to top ↑</a></footer>
 </body>
