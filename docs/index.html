@@ -21,6 +21,15 @@
     .metrics tbody th { text-align: left; }
     .metrics th, .metrics td { padding: 9px 6px; }
     .table-note { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    .prompt-table { width: 100%; min-width: 0; margin: 0 0 28px; table-layout: fixed; font-size: 14px; }
+    .prompt-table th, .prompt-table td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; white-space: normal; overflow-wrap: anywhere; }
+    .prompt-table thead th { border-top: 1px solid var(--line); font-size: 13px; }
+    .prompt-table th:first-child { width: 6%; }
+    .prompt-table th:nth-child(2) { width: 12%; }
+    .prompt-table th:nth-child(3) { width: 10%; }
+    .prompt-table th:nth-child(4) { width: 38%; }
+    .prompt-table th:nth-child(5), .prompt-table th:nth-child(6) { width: 17%; }
+    .prompt-table tbody th { font-weight: 700; }
     .citation-section pre { margin: 0; padding: 23px; overflow-x: auto; border: 1px solid var(--line); border-radius: 7px; background: #f6f8f9; color: #384a55; font: 13px/1.65 Consolas, "Liberation Mono", monospace; }
     @media (max-width: 640px) {
       .metrics thead { display: none; }
@@ -30,6 +39,11 @@
       .metrics tbody td { display: block; text-align: left; }
       .metrics tbody td::before { content: attr(data-label); display: block; color: var(--muted); font-weight: 600; white-space: normal; }
       .metrics .table-wrap { overflow: visible; }
+      .prompt-table thead { display: none; }
+      .prompt-table, .prompt-table tbody, .prompt-table tr, .prompt-table th, .prompt-table td { display: block; width: 100% !important; }
+      .prompt-table tr { margin-bottom: 12px; border: 1px solid var(--line); background: #fff; }
+      .prompt-table tbody th { background: #eef3f6; }
+      .prompt-table td::before { content: attr(data-label); display: block; color: var(--muted); font-size: 12px; font-weight: 600; }
       .citation-section pre { font-size: 11px; }
     }
   </style>
@@ -55,7 +69,7 @@
       <div class="actions">
         <a class="button secondary" href="https://ieeexplore.ieee.org/abstract/document/11641653" target="_blank" rel="noopener noreferrer">Paper <span aria-hidden="true">↗</span></a>
         <a class="button secondary" href="https://github.com/Liying-Xu/PhyVLM-CR">Code <span aria-hidden="true">↗</span></a>
-        <a class="button secondary" href="PhyVLM_CR6_Colab.ipynb" download>Colab notebook <span aria-hidden="true">↓</span></a>
+        <a class="button secondary" href="#code">Colab notebook <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
@@ -78,7 +92,7 @@
 
     <section id="results" class="section results-section">
       <div class="wrap">
-        <div class="section-head"><span class="kicker">02 / EXPERIMENTS</span><h2>Six scenes.<br><em>One continuous treatment.</em></h2></div>
+        <div class="section-head"><span class="kicker">02 / EXPERIMENTS</span><h2>All-cloud Removal Results</h2></div>
         <p class="intro">The manuscript evaluates six 2023 Sentinel-2 scenes using the nearest clear observation as ground truth and the second-nearest as the temporal reference. The images below are reproduced from the supplied manuscript.</p>
         <figure class="figure-card dark-card">
           <a href="assets/results.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open all-cloud removal comparison at full size"><img src="assets/results.jpg" alt="Qualitative comparison across Sichuan, Hainan, Qinghai, Hubei, Jiangsu, and Yunnan" width="1474" height="1074" loading="lazy"></a>
@@ -104,7 +118,13 @@
     <section class="section wrap prompt-section">
       <div class="section-head"><span class="kicker">03 / ROBUSTNESS</span><h2>Prompt Sensitivity Analysis</h2></div>
       <p class="intro">Across four Chinese and English prompts, the proposed PhyVLM-CR method shows comparatively stable results despite larger changes in the raw VLM outputs.</p>
-      <figure class="figure-card"><img src="assets/prompts.jpg" alt="Four prompt variants showing the cloudy scene, VLM output and error, estimated transmission, and final PhyVLM-CR result and error" width="1063" height="692" loading="lazy"><figcaption>Paper Fig. 3 · Prompt sensitivity on the Yunnan scene</figcaption></figure>
+      <table class="prompt-table"><caption>Prompt sensitivity analysis of raw VLM output and final PhyVLM-CR result (PSNR / SSIM).</caption><thead><tr><th scope="col">ID</th><th scope="col">Language</th><th scope="col">Type</th><th scope="col">Prompt</th><th scope="col">VLM<br>PSNR / SSIM</th><th scope="col">PhyVLM-CR<br>PSNR / SSIM</th></tr></thead><tbody>
+        <tr><th scope="row">P1</th><td data-label="Language">Chinese</td><td data-label="Type">Simple</td><td data-label="Prompt" lang="zh">“去云”</td><td data-label="VLM PSNR / SSIM">14.456 / 0.3182</td><td data-label="PhyVLM-CR PSNR / SSIM">19.312 / 0.8606</td></tr>
+        <tr><th scope="row">P2</th><td data-label="Language">English</td><td data-label="Type">Simple</td><td data-label="Prompt">“Remove clouds”</td><td data-label="VLM PSNR / SSIM">14.053 / 0.3755</td><td data-label="PhyVLM-CR PSNR / SSIM">18.522 / 0.8551</td></tr>
+        <tr><th scope="row">P3</th><td data-label="Language">Chinese</td><td data-label="Type">Complex</td><td data-label="Prompt" lang="zh">“保持无云区地表信息不变，恢复云覆盖区下的地表”</td><td data-label="VLM PSNR / SSIM">9.433 / 0.0542</td><td data-label="PhyVLM-CR PSNR / SSIM">15.442 / 0.7784</td></tr>
+        <tr><th scope="row">P4</th><td data-label="Language">English</td><td data-label="Type">Complex</td><td data-label="Prompt">“Keep cloud-free regions unchanged and recover cloud-covered regions”</td><td data-label="VLM PSNR / SSIM">12.148 / 0.0340</td><td data-label="PhyVLM-CR PSNR / SSIM">18.282 / 0.8526</td></tr>
+      </tbody></table>
+      <figure class="figure-card"><img src="assets/prompts.jpg" alt="Four prompt variants showing the cloudy scene, VLM output and error, estimated transmission, and final PhyVLM-CR result and error" width="1063" height="718" loading="lazy"><figcaption>Paper Fig. 3 · Prompt sensitivity on the Yunnan scene</figcaption></figure>
     </section>
 
     <section id="code" class="section code-section"><div class="wrap code-grid"><div><span class="kicker">04 / CODE</span><h2>Colab notebook</h2><p>The public CR6 notebook covers Earth Engine scene collection, Qwen cognitive-prior acquisition, physics-guided restoration, evaluation, and export.</p><a class="button light" href="PhyVLM_CR6_Colab.ipynb" download>Download notebook <span aria-hidden="true">↗</span></a></div><div class="code-notes"><div><span>01</span><p>Open the notebook in Google Colab.</p></div><div><span>02</span><p>Add <code>EE_PROJECT_ID</code> and <code>DASHSCOPE_API_KEY</code> to Colab Secrets and grant access.</p></div><div><span>03</span><p>Run cells in order. Earth Engine and DashScope access are required.</p></div></div></div></section>

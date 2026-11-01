@@ -1,6 +1,6 @@
 # PhyVLM-CR
 
-Code and project page for **Physics-Guided VLM Priors for All-Cloud Removal** by Liying Xu, Huifang Li, and Huanfeng Shen, published in *IEEE Geoscience and Remote Sensing Letters* (2026). [Paper](https://ieeexplore.ieee.org/abstract/document/11641653).
+Code and project page for **Physics-Guided VLM Priors for All-Cloud Removal** by Liying Xu, Huifang Li, and Huanfeng Shen, published in *IEEE Geoscience and Remote Sensing Letters* (2026). [Project page](https://liying-xu.github.io/PhyVLM-CR/) · [Paper](https://ieeexplore.ieee.org/abstract/document/11641653).
 
 ## Colab notebook
 
@@ -15,7 +15,7 @@ The notebook downloads Sentinel-2 observations through Earth Engine, obtains the
 
 ## Project page
 
-The static page is in [`docs/`](docs/index.html). For GitHub Pages, publish the `docs/` folder on the default branch.
+View the [published project page](https://liying-xu.github.io/PhyVLM-CR/). Its source is in [`docs/`](docs/index.html).
 
 ## Scope
 
