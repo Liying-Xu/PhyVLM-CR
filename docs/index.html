@@ -32,6 +32,8 @@
     .prompt-table th:nth-child(5), .prompt-table th:nth-child(6) { width: 17%; }
     .prompt-table tbody th { font-weight: 700; }
     .prompt-table caption { margin-bottom: 10px; color: var(--muted); font-size: 14px; text-align: left; }
+    .code-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .code-actions .button { margin-top: 0; }
     .citation-section pre { margin: 0; padding: 23px; overflow-x: auto; border: 1px solid var(--line); border-radius: 7px; background: #f6f8f9; color: #384a55; font: 13px/1.65 Consolas, "Liberation Mono", monospace; }
     @media (max-width: 640px) {
       .prompt-section .intro { font-size: 16px; }
@@ -130,7 +132,7 @@
       <figure class="figure-card"><img src="assets/prompts.jpg" alt="Four prompt variants showing the cloudy scene, VLM output and error, estimated transmission, final PhyVLM-CR result and error, with a 0–1 error-map legend" width="1158" height="718" loading="lazy"><figcaption>Visual prompt sensitivity analysis on the Yunnan scene.</figcaption></figure>
     </section>
 
-    <section id="code" class="section code-section"><div class="wrap code-grid"><div><span class="kicker">04 / CODE</span><h2>Colab notebook</h2><p>The public CR6 notebook covers Earth Engine scene collection, Qwen cognitive-prior acquisition, physics-guided restoration, evaluation, and export.</p><a class="button light" href="PhyVLM_CR6_Colab.ipynb" download>Download notebook <span aria-hidden="true">↗</span></a></div><div class="code-notes"><div><span>01</span><p>Open the notebook in Google Colab.</p></div><div><span>02</span><p>Add <code>EE_PROJECT_ID</code> and <code>DASHSCOPE_API_KEY</code> to Colab Secrets and grant access.</p></div><div><span>03</span><p>Run cells in order. Earth Engine and DashScope access are required.</p></div></div></div></section>
+    <section id="code" class="section code-section"><div class="wrap code-grid"><div><span class="kicker">04 / CODE</span><h2>Colab notebook</h2><p>The public CR6 notebook covers Earth Engine scene collection, Qwen cognitive-prior acquisition, physics-guided restoration, evaluation, and export.</p><div class="code-actions"><a class="button light" href="PhyVLM_CR6_Colab.ipynb" download>Download notebook</a><a class="button secondary" href="https://colab.research.google.com/github/Liying-Xu/PhyVLM-CR/blob/main/PhyVLM_CR6_Colab.ipynb" target="_blank" rel="noopener noreferrer">Open in Colab</a></div></div><div class="code-notes"><div><span>01</span><p>Open the notebook in Google Colab.</p></div><div><span>02</span><p>Add <code>EE_PROJECT_ID</code> and <code>DASHSCOPE_API_KEY</code> to Colab Secrets and grant access.</p></div><div><span>03</span><p>Run cells in order. Earth Engine and DashScope access are required.</p></div></div></div></section>
     <section id="citation" class="section citation-section reading-width"><h2>Citation</h2><pre><code>@article{Xu_2026,
   title={Physics-Guided VLM Priors for All-Cloud Removal},
   author={Xu, Liying and Li, Huifang and Shen, Huanfeng},
