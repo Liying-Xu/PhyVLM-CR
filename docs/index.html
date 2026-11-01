@@ -7,6 +7,32 @@
   <title>PhyVLM-CR | Physics-Guided VLM Priors for All-Cloud Removal</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="pgcs-alignment.css">
+  <style>
+    .hero { padding-bottom: 50px; }
+    .abstract-section > div > p { text-align: justify; text-justify: inter-word; hyphens: auto; }
+    .method-description { margin-top: 24px; }
+    .metrics { display: block; }
+    .metric-lead { margin: 0 0 18px; }
+    .metric-lead h3 { margin: 6px 0; }
+    .metric-lead p { max-width: none; }
+    .metrics table { min-width: 0; width: 100%; table-layout: fixed; font-size: 13px; }
+    .metrics thead th { white-space: normal; text-align: center; line-height: 1.35; }
+    .metrics tbody td { text-align: center; white-space: nowrap; }
+    .metrics tbody th { text-align: left; }
+    .metrics th, .metrics td { padding: 9px 6px; }
+    .table-note { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    .citation-section pre { margin: 0; padding: 23px; overflow-x: auto; border: 1px solid var(--line); border-radius: 7px; background: #f6f8f9; color: #384a55; font: 13px/1.65 Consolas, "Liberation Mono", monospace; }
+    @media (max-width: 640px) {
+      .metrics thead { display: none; }
+      .metrics table, .metrics tbody, .metrics tr, .metrics th, .metrics td { display: block; width: 100%; }
+      .metrics tr { margin-bottom: 16px; border: 1px solid var(--line); background: #fff; }
+      .metrics tbody th { background: #eef3f6; font-weight: 700; }
+      .metrics tbody td { display: block; text-align: left; }
+      .metrics tbody td::before { content: attr(data-label); display: block; color: var(--muted); font-weight: 600; white-space: normal; }
+      .metrics .table-wrap { overflow: visible; }
+      .citation-section pre { font-size: 11px; }
+    }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -23,45 +49,31 @@
   <main id="top">
     <section class="hero wrap">
       <h1>Physics-Guided VLM Priors for All-Cloud Removal</h1>
-      <p class="venue">PhyVLM-CR · Research manuscript</p>
+      <p class="venue">IEEE Geoscience and Remote Sensing Letters · 2026</p>
       <p class="authors">Liying Xu, Huifang Li, Huanfeng Shen</p>
       <p class="affiliation">Wuhan University · Wuhan, China</p>
       <div class="actions">
-        <a class="button secondary" href="#abstract">Abstract <span aria-hidden="true">↓</span></a>
+        <a class="button secondary" href="https://ieeexplore.ieee.org/abstract/document/11641653" target="_blank" rel="noopener noreferrer">Paper <span aria-hidden="true">↗</span></a>
         <a class="button secondary" href="https://github.com/Liying-Xu/PhyVLM-CR">Code <span aria-hidden="true">↗</span></a>
         <a class="button secondary" href="PhyVLM_CR6_Colab.ipynb" download>Colab notebook <span aria-hidden="true">↓</span></a>
-      </div>
-      <div class="hero-visual">
-        <img src="assets/results.jpg" alt="Six Sentinel-2 scenes comparing cloudy input, mask, temporal reference, baselines, PhyVLM-CR and clear ground truth" width="1440" height="1050">
-        <span class="image-tag">PAPER FIG. 2 · SIX REAL CLOUD SCENES</span>
       </div>
     </section>
 
     <section id="abstract" class="section abstract-section">
       <div class="reading-width">
         <h2>Abstract</h2>
-        <p>Cloud removal remains a fundamental challenge in optical remote sensing due to heterogeneous cloud degradation. Thin clouds distort surface radiometry through partial transmission, while thick clouds obscure the underlying surface. Existing methods often handle thin-cloud correction and thick-cloud reconstruction separately, requiring explicit cloud-type delineation and causing error accumulation or spatial discontinuities in mixed-cloud scenes. To address this issue, we propose PhyVLM-CR, a physics-guided VLM prior framework for all-cloud removal, which integrates the semantic capability of a Vision-Language Model (VLM) with a physical imaging model. Specifically, the VLM output is incorporated into the estimation of a physical transmission map. The estimated transmission map supports thin-cloud radiometric correction through physical inversion and further provides a continuous weight for balancing current-scene restoration and temporally aligned reference information in low-transmission regions. By coupling the radiometric consistency of the physical model with the semantic and illumination priors of the VLM, PhyVLM-CR achieves physically constrained and semantically informed restoration without explicit cloud-type delineation. Experiments on real-world Sentinel-2 surface reflectance imagery demonstrate that PhyVLM-CR achieves superior visual and quantitative performance compared with existing cloud-removal methods.</p>
-        <div class="affiliations">
-          <p><strong>Affiliations from the manuscript</strong></p>
-          <p><strong>Liying Xu:</strong> School of Resource and Environmental Sciences and the Key Laboratory of Digital Cartography and Land Information Application, Ministry of Natural Resources, Wuhan University, Wuhan, China.</p>
-          <p><strong>Huifang Li:</strong> School of Resource and Environmental, Wuhan University, Wuhan, China.</p>
-          <p><strong>Huanfeng Shen:</strong> School of Resource and Environmental Sciences and the Collaborative Innovation Center for Geospatial Technology, Wuhan University, Wuhan, China.</p>
-        </div>
+        <p>Cloud removal remains a fundamental challenge in optical remote sensing due to heterogeneous cloud degradation. Thin clouds distort surface radiometry through partial transmission, while thick clouds obscure the underlying surface. Existing methods often handle thin-cloud correction and thick-cloud reconstruction separately, requiring explicit cloud-type delineation and causing error accumulation or spatial discontinuities in mixed-cloud scenes. To address this issue, we propose PhyVLM-CR, a <strong>physics-guided VLM prior framework</strong> for all-cloud removal, which integrates the semantic capability of a Vision-Language Model (VLM) with a physical imaging model. Specifically, the VLM output is incorporated into the estimation of a <strong>physical transmission map</strong>. The estimated transmission map supports thin-cloud radiometric correction through physical inversion and further provides a <strong>continuous weight</strong> for balancing current-scene restoration and temporally aligned reference information in low-transmission regions. By coupling the radiometric consistency of the physical model with the semantic and illumination priors of the VLM, PhyVLM-CR achieves physically constrained and semantically informed restoration <strong>without explicit cloud-type delineation</strong>. Experiments on real-world Sentinel-2 surface reflectance imagery demonstrate that PhyVLM-CR achieves superior visual and quantitative performance compared with existing cloud-removal methods.</p>
       </div>
     </section>
 
     <section id="approach" class="section wrap">
-      <div class="section-head"><span class="kicker">01 / APPROACH</span><h2>A generative prior,<br><em>grounded in physics.</em></h2></div>
-      <p class="intro">The VLM prediction is used to infer atmospheric light and transmission, rather than copied directly into the final image. A continuous transmission map balances physical inversion with the observed image and a clear temporal reference.</p>
+      <div class="section-head"><span class="kicker">01 / APPROACH</span><h2>PhyVLM_CR</h2></div>
+      <p class="intro">Because direct VLM predictions can hallucinate, PhyVLM-CR uses them as cognitive priors to estimate physical parameters rather than as the final cloud-removal result.</p>
       <figure class="figure-card">
         <img src="assets/method.png" alt="Three-stage PhyVLM-CR pipeline: VLM cognitive prior acquisition, physics-guided parameter extraction, and unified all-cloud removal" width="1141" height="494" loading="lazy">
-        <figcaption>Paper Fig. 1 · Cognitive prior → physical parameters → unified restoration</figcaption>
+        <figcaption>Overview of the proposed PhyVLM-CR</figcaption>
       </figure>
-      <div class="steps">
-        <div><b>01</b><h3>Acquire</h3><p>Qwen-Image-Edit supplies a semantic cloud-free prediction.</p></div>
-        <div><b>02</b><h3>Translate</h3><p>The prediction helps estimate atmospheric light and transmission.</p></div>
-        <div><b>03</b><h3>Restore</h3><p>Transmission guides physical correction and temporal fusion.</p></div>
-      </div>
+      <p class="method-description">PhyVLM-CR estimates atmospheric light and transmission from the cloudy observation with guidance from the VLM prior. It then combines physical inversion, low-frequency cognitive adjustment, preservation of observed detail, and a radiometrically aligned temporal reference. Transmission continuously controls the balance between restoration from the current image and reference-based reconstruction where the surface is obscured.</p>
     </section>
 
     <section id="results" class="section results-section">
@@ -69,34 +81,42 @@
         <div class="section-head"><span class="kicker">02 / EXPERIMENTS</span><h2>Six scenes.<br><em>One continuous treatment.</em></h2></div>
         <p class="intro">The manuscript evaluates six 2023 Sentinel-2 scenes using the nearest clear observation as ground truth and the second-nearest as the temporal reference. The images below are reproduced from the supplied manuscript.</p>
         <figure class="figure-card dark-card">
-          <img src="assets/results.jpg" alt="Qualitative comparison across Sichuan, Hainan, Qinghai, Hubei, Jiangsu, and Yunnan" width="1440" height="1050" loading="lazy">
-          <figcaption>Paper Fig. 2 · Cloudy · mask · reference · physical baseline · zero-shot baseline · VLM · PhyVLM-CR · truth</figcaption>
+          <a href="assets/results.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open all-cloud removal comparison at full size"><img src="assets/results.jpg" alt="Qualitative comparison across Sichuan, Hainan, Qinghai, Hubei, Jiangsu, and Yunnan" width="1474" height="1074" loading="lazy"></a>
+          <figcaption>All-cloud removal results based on the various methods.</figcaption>
         </figure>
         <div class="metrics">
-          <div class="metric-lead"><span class="kicker">PAPER TABLE II</span><h3>Reported quality</h3><p>PSNR (dB) and SSIM against the clear target. These are manuscript values, not measurements from a new notebook run.</p></div>
+          <div class="metric-lead"><span class="kicker">PAPER TABLE II</span><h3>Reported quality</h3><p>PSNR (dB) / SSIM against the clear target. These are paper values, not measurements from a new notebook run.</p></div>
           <div class="table-wrap"><table>
-            <thead><tr><th>Scene</th><th>Physical</th><th>Zero-shot</th><th>VLM</th><th>PhyVLM-CR</th></tr></thead>
+            <thead><tr><th scope="col">Scene</th><th scope="col">Traditional physical</th><th scope="col">Zero-shot deep learning</th><th scope="col">Vision-Language Model</th><th scope="col">PhyVLM-CR</th></tr></thead>
             <tbody>
-              <tr><th>Sichuan</th><td>17.583 / .5492</td><td>12.450 / .2679</td><td>20.890 / .5706</td><td>22.934 / .8012</td></tr>
-              <tr><th>Hainan</th><td>17.531 / .5556</td><td>12.737 / .2801</td><td>13.995 / .2547</td><td>19.168 / .7490</td></tr>
-              <tr><th>Qinghai</th><td>15.847 / .7698</td><td>9.708 / .3022</td><td>14.456 / .3182</td><td>19.312 / .8606</td></tr>
-              <tr><th>Hubei</th><td>19.701 / .7313</td><td>14.568 / .3042</td><td>18.937 / .5655</td><td>26.435 / .9025</td></tr>
-              <tr><th>Jiangsu</th><td>15.495 / .5258</td><td>11.073 / .2211</td><td>18.324 / .4125</td><td>22.332 / .7922</td></tr>
-              <tr><th>Yunnan</th><td>17.214 / .6522</td><td>11.512 / .3106</td><td>13.229 / .0323</td><td>21.149 / .8176</td></tr>
+              <tr><th scope="row">Sichuan</th><td data-label="Traditional physical">17.583 / 0.5492</td><td data-label="Zero-shot deep learning">12.450 / 0.2679</td><td data-label="Vision-Language Model"><u>20.890</u> / <u>0.5706</u></td><td data-label="PhyVLM-CR"><strong>22.934 / 0.8012</strong></td></tr>
+              <tr><th scope="row">Hainan</th><td data-label="Traditional physical"><u>17.531</u> / <u>0.5556</u></td><td data-label="Zero-shot deep learning">12.737 / 0.2801</td><td data-label="Vision-Language Model">13.995 / 0.2547</td><td data-label="PhyVLM-CR"><strong>19.168 / 0.7490</strong></td></tr>
+              <tr><th scope="row">Qinghai</th><td data-label="Traditional physical"><u>15.847</u> / <u>0.7698</u></td><td data-label="Zero-shot deep learning">9.708 / 0.3022</td><td data-label="Vision-Language Model">14.456 / 0.3182</td><td data-label="PhyVLM-CR"><strong>19.312 / 0.8606</strong></td></tr>
+              <tr><th scope="row">Hubei</th><td data-label="Traditional physical"><u>19.701</u> / <u>0.7313</u></td><td data-label="Zero-shot deep learning">14.568 / 0.3042</td><td data-label="Vision-Language Model">18.937 / 0.5655</td><td data-label="PhyVLM-CR"><strong>26.435 / 0.9025</strong></td></tr>
+              <tr><th scope="row">Jiangsu</th><td data-label="Traditional physical">15.495 / <u>0.5258</u></td><td data-label="Zero-shot deep learning">11.073 / 0.2211</td><td data-label="Vision-Language Model"><u>18.324</u> / 0.4125</td><td data-label="PhyVLM-CR"><strong>22.332 / 0.7922</strong></td></tr>
+              <tr><th scope="row">Yunnan</th><td data-label="Traditional physical"><u>17.214</u> / <u>0.6522</u></td><td data-label="Zero-shot deep learning">11.512 / 0.3106</td><td data-label="Vision-Language Model">13.229 / 0.0323</td><td data-label="PhyVLM-CR"><strong>21.149 / 0.8176</strong></td></tr>
             </tbody>
-          </table></div>
+          </table><p class="table-note">Best results are <strong>bold</strong>; second-best results are <u>underlined</u>. PSNR and SSIM are ranked separately within each scene.</p></div>
         </div>
       </div>
     </section>
 
     <section class="section wrap prompt-section">
-      <div class="section-head"><span class="kicker">03 / ROBUSTNESS</span><h2>The prompt changes.<br><em>The physics remains.</em></h2></div>
-      <p class="intro">The paper compares four Chinese and English prompts on Yunnan. Raw VLM images vary with wording; the final restoration is constrained by transmission-guided fusion.</p>
+      <div class="section-head"><span class="kicker">03 / ROBUSTNESS</span><h2>Prompt Sensitivity Analysis</h2></div>
+      <p class="intro">Across four Chinese and English prompts, the proposed PhyVLM-CR method shows comparatively stable results despite larger changes in the raw VLM outputs.</p>
       <figure class="figure-card"><img src="assets/prompts.jpg" alt="Four prompt variants showing the cloudy scene, VLM output and error, estimated transmission, and final PhyVLM-CR result and error" width="1063" height="692" loading="lazy"><figcaption>Paper Fig. 3 · Prompt sensitivity on the Yunnan scene</figcaption></figure>
     </section>
 
     <section id="code" class="section code-section"><div class="wrap code-grid"><div><span class="kicker">04 / CODE</span><h2>Colab notebook</h2><p>The public CR6 notebook covers Earth Engine scene collection, Qwen cognitive-prior acquisition, physics-guided restoration, evaluation, and export.</p><a class="button light" href="PhyVLM_CR6_Colab.ipynb" download>Download notebook <span aria-hidden="true">↗</span></a></div><div class="code-notes"><div><span>01</span><p>Open the notebook in Google Colab.</p></div><div><span>02</span><p>Add <code>EE_PROJECT_ID</code> and <code>DASHSCOPE_API_KEY</code> to Colab Secrets and grant access.</p></div><div><span>03</span><p>Run cells in order. Earth Engine and DashScope access are required.</p></div></div></div></section>
-    <section id="citation" class="section citation-section reading-width"><h2>Citation</h2><p>Xu, L., Li, H., and Shen, H. <em>Physics-Guided VLM Priors for All-Cloud Removal.</em> Manuscript. Publication details will be added when available.</p></section>
+    <section id="citation" class="section citation-section reading-width"><h2>Citation</h2><pre><code>@article{Xu_2026,
+  title={Physics-Guided VLM Priors for All-Cloud Removal},
+  author={Xu, Liying and Li, Huifang and Shen, Huanfeng},
+  journal={IEEE Geoscience and Remote Sensing Letters},
+  volume={23},
+  pages={6017305--6017305},
+  year={2026},
+  doi={10.1109/LGRS.2026.3720251}
+}</code></pre></section>
   </main>
   <footer class="wrap"><span>PhyVLM-CR · Physics-Guided VLM Priors for All-Cloud Removal</span><a href="#top">Back to top ↑</a></footer>
 </body>

@@ -1,6 +1,6 @@
 # PhyVLM-CR
 
-Code and project page for **Physics-Guided VLM Priors for All-Cloud Removal** by Liying Xu, Huifang Li, and Huanfeng Shen.
+Code and project page for **Physics-Guided VLM Priors for All-Cloud Removal** by Liying Xu, Huifang Li, and Huanfeng Shen, published in *IEEE Geoscience and Remote Sensing Letters* (2026). [Paper](https://ieeexplore.ieee.org/abstract/document/11641653).
 
 ## Colab notebook
 
@@ -27,4 +27,14 @@ The code is available under the [Apache License 2.0](LICENSE). Figures reproduce
 
 ## Citation
 
-Xu, L., Li, H., and Shen, H. *Physics-Guided VLM Priors for All-Cloud Removal*. Manuscript supplied with this release. Please update the citation when publication details are available.
+```bibtex
+@article{Xu_2026,
+  title={Physics-Guided VLM Priors for All-Cloud Removal},
+  author={Xu, Liying and Li, Huifang and Shen, Huanfeng},
+  journal={IEEE Geoscience and Remote Sensing Letters},
+  volume={23},
+  pages={6017305--6017305},
+  year={2026},
+  doi={10.1109/LGRS.2026.3720251}
+}
+```
